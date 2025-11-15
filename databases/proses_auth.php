@@ -9,30 +9,37 @@ function login($data)
   $username = strtolower($data['username']);
   $password = $data['password'];
 
-  $query = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
-  $query->bind_param("ss", $username, $password);
+  // Ambil user berdasarkan username saja
+  $query = $conn->prepare("SELECT * FROM user WHERE username = ?");
+  $query->bind_param("s", $username);
   $query->execute();
 
   $result = $query->get_result();
 
   if ($result->num_rows > 0) {
-
     $user = $result->fetch_assoc();
-    $_SESSION['is-user'] = true;
-    $_SESSION['id'] = $user['id'];
-    $_SESSION['password'] = $user['password'];
-    $_SESSION['username'] = $user['username'];
-    $_SESSION['nama'] = $user['nama'];
-    $_SESSION['no_telp'] = $user['no_telp'];
-    // $_SESSION['foto'] = $user['foto'];
 
-    header("Location: ../index.html");
-  } else {
-    header("Location: login.php?login=gagal");
+    // Cek password dengan password_verify
+    if (password_verify($password, $user['password'])) {
+      session_start();
+      $_SESSION['is-user'] = true;
+      $_SESSION['id'] = $user['id'];
+      $_SESSION['password'] = $user['password'];
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['email'] = $user['email'];
+      $_SESSION['nama'] = $user['nama'];
+      $_SESSION['no_telp'] = $user['no_telp'];
+
+      header("Location: ../admin/index.php");
+      exit;
+    }
   }
 
-  return $result;
+  // Kalau gagal
+  header("Location: login.php?login=gagal");
+  exit;
 }
+
 
 
 function register($data)
