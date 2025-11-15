@@ -1,6 +1,14 @@
 <?php
 require '../databases/proses_auth.php';
 
+session_start();
+
+// Jika sudah login, redirect ke index
+if (isset($_SESSION['is-user']) && $_SESSION['is-user'] === true) {
+  header("Location: ../admin/index.php");
+  exit;
+}
+
 if (isset($_POST['regis'])) {
   register($_POST);
 }

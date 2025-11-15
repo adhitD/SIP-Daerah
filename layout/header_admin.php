@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Jika sudah login, redirect ke index
+// if (isset($_SESSION['is-user']) || $_SESSION['is-user'] !== true) {
+//   header("Location: ../../auth/login.php");
+//   exit;
+// }
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -39,7 +48,7 @@
       </a>
     </nav>
 
-    <form action="../auth/logout.php" method="POST" class="ps-2">
+    <form action="../../auth/logout.php" method="POST" class="ps-2">
       <button type="submit" class="nav-link btn btn-link text-danger p-0 text-start">
         <i class="bi bi-box-arrow-right me-2"></i> Logout
       </button>
@@ -81,7 +90,7 @@
           <a href="#" class="d-flex align-items-center text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="../../assets/images/ayam iloni.png" alt="profile" class="rounded-circle me-2" width="40" height="40" />
             <div class="d-none d-sm-block text-start">
-              Sarjan
+              <?= $_SESSION['nama'] ?? 'Admin'; ?>
             </div>
           </a>
 
@@ -91,7 +100,7 @@
               <div class="d-flex align-items-center gap-3">
                 <img src="../../assets/images/ayam iloni.png" class="rounded-circle" width="60" height="60" alt="profile" />
                 <div>
-                  <h6 class="mb-0 fw-semibold">Sarjan Nusuri</h6>
+                  <h6 class="mb-0 fw-semibold"><?= $_SESSION['nama'] ?? 'Admin'; ?></h6>
                   <small class="text-muted">Admin</small>
                 </div>
               </div>
@@ -106,7 +115,7 @@
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <form action="../auth/logout.php" method="POST" class="mt-3">
+              <form action="../../auth/logout.php" method="POST" class="mt-3">
                 <input type="hidden" name="_token" value="wgJRloRbRy0fr26B0wEY12YbxHPgmtfEmaGwLIa6" autocomplete="off"> <button type="submit" class="dropdown-item d-flex align-items-center text-danger pl-5">
                   <i class="bi bi-box-arrow-right me-2"></i>Log Out </a>
                 </button>

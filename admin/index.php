@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Jika sudah login, redirect ke index
+// if (isset($_SESSION['is-user']) || $_SESSION['is-user'] !== true) {
+//   header("Location: ../../auth/login.php");
+//   exit;
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -81,7 +91,7 @@
           <a href="#" class="d-flex align-items-center text-decoration-none" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="../assets/images/ayam iloni.png" alt="profile" class="rounded-circle me-2" width="40" height="40" />
             <div class="d-none d-sm-block text-start">
-              Sarjan
+              <?= $_SESSION['nama'] ?? 'Admin'; ?>
             </div>
           </a>
 
@@ -91,7 +101,7 @@
               <div class="d-flex align-items-center gap-3">
                 <img src="../assets/images/ayam iloni.png" class="rounded-circle" width="60" height="60" alt="profile" />
                 <div>
-                  <h6 class="mb-0 fw-semibold">Sarjan Nusuri</h6>
+                  <h6 class="mb-0 fw-semibold"><?= $_SESSION['nama'] ?? 'Admin'; ?></h6>
                   <small class="text-muted">Admin</small>
                 </div>
               </div>
