@@ -1,4 +1,5 @@
 <?php
+require '../../databases/koneksi.php';
 require '../../layout/header_admin.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
@@ -13,38 +14,44 @@ require '../../layout/header_admin.php'; ?>
 
 <div class="card shadow-sm border-0">
   <div class="card-body p-4">
-
-    <form action="event_store.php" method="POST">
+<?php 
+$id = $_GET['id'];
+  $sql = "SELECT * FROM event WHERE id=$id";
+  $result = mysqli_query($conn,$sql);
+  $row= mysqli_fetch_assoc($result);
+?>
+    <form action="proses_edit.php" method="POST">
       <div class="row g-4">
 
         <!-- Nama Event -->
+        <input type="hidden" class="form-control" name="id" value="<?=$row['id']?>">
         <div class="col-md-6">
           <label class="form-label fw-semibold">Nama Event<span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="nama" placeholder="Masukkan nama event">
+          <input type="text" class="form-control" name="nama" value="<?=$row['nama']?>">
         </div>
 
         <!-- Tanggal Acara -->
         <div class="col-md-6">
           <label class="form-label fw-semibold">Tanggal Acara<span class="text-danger">*</span></label>
-          <input type="date" class="form-control" name="tanggal">
+          <input type="date" class="form-control" name="tanggal" value="<?=$row['tanggal']?>">
         </div>
 
         <!-- Lokasi -->
         <div class="col-md-6">
           <label class="form-label fw-semibold">Lokasi Event<span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="lokasi" placeholder="Masukkan lokasi event">
+          <input type="text" class="form-control" name="lokasi" value="<?=$row['lokasi']?>" >
         </div>
 
         <!-- Keterangan -->
         <div class="col-12">
           <label class="form-label fw-semibold">Keterangan</label>
-          <textarea class="form-control" name="keterangan" rows="4" placeholder="Tuliskan keterangan atau detail event"></textarea>
+          <textarea class="form-control" name="keterangan" rows="4"><?=$row['keterangan']?></textarea>
         </div>
 
       </div>
 
       <div class="mt-5 d-flex justify-content-end gap-2">
-        <button type="submit" class="btn btn-warning px-4">
+        <button type="submit" name="edit" class="btn btn-warning px-4">
           <i class="bi bi-save me-1"></i> Simpan Event
         </button>
       </div>

@@ -1,4 +1,6 @@
-<?php require '../../layout/header_admin.php'; ?>
+<?php
+require '../../databases/koneksi.php';
+require '../../layout/header_admin.php'; ?>
 
 <div class="container mt-5">
 
@@ -27,14 +29,18 @@
           </thead>
 
           <tbody>
-
+<?php $no=1; 
+  $sql = 'SELECT * FROM event';
+  $result = mysqli_query($conn,$sql);
+  while($row=mysqli_fetch_assoc($result)){
+  ?>
             <!-- Dummy 1 -->
             <tr class="text-center">
-              <td>1</td>
-              <td>Festival Danau Limboto</td>
-              <td>2025-06-12</td>
-              <td>Kabupaten Gorontalo</td>
-              <td>Perlombaan perahu dan bazar UMKM</td>
+              <td><?=$no++?></td>
+              <td><?=$row['nama']?></td>
+              <td><?=$row['tanggal']?></td>
+              <td><?=$row['lokasi']?></td>
+              <td><?=$row['keterangan']?></td>
               <td>3 jam lalu</td>
               <td>
                 <div class="dropdown">
@@ -45,14 +51,12 @@
 
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item text-warning" href="edit.php">
+                      <a class="dropdown-item text-warning" href="edit.php?id=<?=$row['id']?>">
                         <i class="bi bi-pencil me-1"></i>Edit
                       </a>
                     </li>
                     <li>
-                      <button class="dropdown-item text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete1">
+                   <a class="dropdown-item text-danger" href="proses_hapus.php?id=<?=$row['id']?>">
                         <i class="bi bi-trash me-1"></i>Hapus
                       </button>
                     </li>
@@ -60,72 +64,8 @@
                 </div>
               </td>
             </tr>
-
-            <!-- Dummy 2 -->
-            <tr class="text-center">
-              <td>2</td>
-              <td>Gorontalo Marathon</td>
-              <td>2025-08-21</td>
-              <td>Kota Gorontalo</td>
-              <td>Event lari skala nasional</td>
-              <td>2 hari lalu</td>
-              <td>
-                <div class="dropdown">
-                  <button class="bg-transparent btn-sm border-0"
-                    data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item text-warning" href="#">
-                        <i class="bi bi-pencil me-1"></i>Edit
-                      </a>
-                    </li>
-                    <li>
-                      <button class="dropdown-item text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete2">
-                        <i class="bi bi-trash me-1"></i>Hapus
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Dummy 3 -->
-            <tr class="text-center">
-              <td>3</td>
-              <td>Festival Karawo</td>
-              <td>2025-10-05</td>
-              <td>Kota Gorontalo</td>
-              <td>Pameran seni dan pakaian motif karawo</td>
-              <td>1 minggu lalu</td>
-              <td>
-                <div class="dropdown">
-                  <button class="bg-transparent btn-sm border-0"
-                    data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item text-warning" href="#">
-                        <i class="bi bi-pencil me-1"></i>Edit
-                      </a>
-                    </li>
-                    <li>
-                      <button class="dropdown-item text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete3">
-                        <i class="bi bi-trash me-1"></i>Hapus
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
+<?php } ?>
+           
 
           </tbody>
         </table>

@@ -14,7 +14,7 @@ require '../../layout/header_admin.php'; ?>
 <div class="card shadow-sm border-0">
   <div class="card-body p-4">
 
-    <form action="event_store.php" method="POST">
+    <form action="proses_create.php" method="POST">
       <div class="row g-4">
 
         <!-- Nama Event -->
@@ -44,7 +44,7 @@ require '../../layout/header_admin.php'; ?>
       </div>
 
       <div class="mt-5 d-flex justify-content-end gap-2">
-        <button type="submit" class="btn btn-primary px-4">
+        <button type="submit" name="tambah" class="btn btn-primary px-4">
           <i class="bi bi-save me-1"></i> Simpan Event
         </button>
       </div>
