@@ -1,0 +1,297 @@
+
+:root {
+  --primary: #043873;       /* Dark Blue */
+  --accent:  #FFE492;       /* Soft Yellow */
+  --secondary: #4F9CF9;     /* Light Blue */
+  --dark: #021e3e; 
+  --light: #f6f8fb;
+  --white: #ffffff;
+  --muted: #6c757d;
+  --card-shadow: rgba(2,12,27,0.06);
+  --card-shadow-hover: rgba(2,12,27,0.14);
+
+  /* Text sizes */
+  --title-lg: 2.5rem;
+  --title-md: 1.6rem;
+  --text-md: 1rem;
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --primary: #021e3e;
+  --light: #0f1520;
+  --white: #181f2e;
+  --muted: #9da9b9;
+  --card-shadow: rgba(255,255,255,0.06);
+  --card-shadow-hover: rgba(255,255,255,0.14);
+  color: var(--muted);
+  background: var(--light);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--light);
+  font-family: "Inter", system-ui, sans-serif;
+  color: #072033;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar modern */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 20px; }
+::-webkit-scrollbar-track { background: #d8e0ef; }
+
+/* ------------------------------
+   NAVBAR
+--------------------------------*/
+.navbar {
+  background: linear-gradient(90deg, var(--primary), #062f59);
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.12);
+}
+
+.navbar-brand {
+  font-weight: 650;
+  color: var(--white) !important;
+  letter-spacing: .3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.95) !important;
+  font-weight: 600;
+  padding: 0.7rem 1rem !important;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  color: var(--accent) !important;
+}
+
+.lang-switch {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: .85rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ------------------------------
+   HERO SECTION
+--------------------------------*/
+.hero {
+  min-height: 85vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--white);
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 3.2rem;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 6px 30px rgba(0,0,0,0.4);
+}
+
+.hero p {
+  color: rgba(255,255,255,.95);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+
+/* ------------------------------
+   BUTTONS
+--------------------------------*/
+.btn-primary-custom {
+  background: var(--secondary);
+  border: none;
+  color: var(--white);
+  padding: .65rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: .2s;
+  box-shadow: 0 10px 30px rgba(79,156,249,0.2);
+}
+
+.btn-primary-custom:hover {
+  background: #2f89f4;
+  box-shadow: 0 12px 40px rgba(79,156,249,0.3);
+}
+
+.btn-outline-accent {
+  border: 2px solid var(--accent);
+  color: var(--primary);
+  padding: .55rem 1.15rem;
+  border-radius: 12px;
+  font-weight: 700;
+  background: transparent;
+  transition: .2s;
+}
+
+.btn-outline-accent:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+/* ------------------------------
+   SECTIONS
+--------------------------------*/
+.section {
+  padding: 4.5rem 0;
+}
+
+.title {
+  color: var(--primary);
+  font-size: var(--title-md);
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  max-width: 700px;
+}
+
+/* ------------------------------
+   CARDS (wisata/kuliner/event)
+--------------------------------*/
+.card-tour {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px var(--card-shadow);
+  overflow: hidden;
+  transition: .25s ease;
+}
+
+.card-tour:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 60px var(--card-shadow-hover);
+}
+
+.card-tour img {
+  height: 210px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.badge-accent {
+  background: var(--accent);
+  color: var(--primary);
+  padding: .35rem .6rem;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* ------------------------------
+   MAP FRAME (landing page)
+--------------------------------*/
+.map-frame {
+  border: 0;
+  width: 100%;
+  height: 63vh;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.1);
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+.site-footer {
+  background: linear-gradient(90deg,var(--primary),#062f59);
+  color: var(--white);
+  padding: 3.5rem 0 2rem;
+}
+
+.site-footer h6 {
+  font-weight: 700;
+}
+
+/* Footer links */
+.site-footer a {
+  color: #ffffff;
+  opacity: .95;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  opacity: 1;
+}
+
+.footer-top {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+
+/* Tablet */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+  .section {
+    padding: 3.8rem 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 2rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .card-tour img {
+    height: 160px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  :root {
+    --title-md: 1.3rem;
+  }
+  .btn-primary-custom,
+  .btn-outline-accent {
+    width: 100%;
+  }
+}
+
+/* ------------------------------
+   UTILITY CLASSES
+--------------------------------*/
+.text-primary-strong { color: var(--primary); }
+.bg-primary { background: var(--primary); }
+.bg-accent { background: var(--accent); }
+.rounded-12 { border-radius: 12px; }
+.shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+
+/* Print optimization */
+@media print {
+  .navbar,
+  .site-footer,
+  button,
+  .btn { display: none !important; }
+}
+
+
