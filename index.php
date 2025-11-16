@@ -1,4 +1,5 @@
 <?php
+require 'databases/koneksi.php';  
 require 'layout/header.php'; ?>
 
 <!-- HERO -->
@@ -28,49 +29,31 @@ require 'layout/header.php'; ?>
 
     <div class="row g-4">
       <!-- Card 1 -->
+       <?php 
+       $sql = "SELECT * FROM destinasi ";
+       $result = mysqli_query($conn, $sql);
+       while($row = mysqli_fetch_assoc($result)){
+        $foto = $row['cover'];
+       ?>
       <div class="col-md-4" data-aos="zoom-in" data-aos-delay="50">
         <article class="card-tour">
-          <img src="assets/images/Benteng otanaha.png" alt="Benteng Otanaha panorama">
+          <img src="assets/images/destinasi/<?=$foto?>" alt="Benteng Otanaha panorama">
           <div class="p-3">
-            <h5 class="mb-1">Benteng Otanaha</h5>
-            <p class="small text-muted mb-2">Benteng peninggalan sejarah dengan pemandangan Danau Limboto.</p>
+            <h5 class="mb-1"><?=$row['nama']?></h5>
+            <p class="small text-muted mb-2"><?=$row['deskripsi']?></p>
             <div class="d-flex justify-content-between align-items-center">
               <span class="badge-accent">Budaya</span>
-              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalWisata1">Detail</button>
+              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalWisata<?=$row['id']?>">Detail</button>
             </div>
           </div>
         </article>
       </div>
+      <?php 
+       }
+       ?>
 
       <!-- Card 2 -->
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="120">
-        <article class="card-tour">
-          <img src="assets/images/taman olele.png" alt="Taman Laut Olele">
-          <div class="p-3">
-            <h5 class="mb-1">Taman Laut Olele</h5>
-            <p class="small text-muted mb-2">Terumbu karang kelas dunia, ideal untuk snorkeling & diving.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge-accent">Bahari</span>
-              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalWisata2">Detail</button>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="190">
-        <article class="card-tour">
-          <img src="assets/images/shark.png" alt="Whale Shark Botubarani">
-          <div class="p-3">
-            <h5 class="mb-1">Whale Shark Botubarani</h5>
-            <p class="small text-muted mb-2">Spot etis untuk melihat hiu paus dari dekat bersama pemandu tersertifikasi.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge-accent">Wildlife</span>
-              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalWisata3">Detail</button>
-            </div>
-          </div>
-        </article>
-      </div>
+      
     </div>
   </div>
 </section>
@@ -90,49 +73,27 @@ require 'layout/header.php'; ?>
 
     <div class="row g-4">
       <!-- Kuliner 1 -->
+       <?php 
+       $sql = "SELECT * FROM kuliner ";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+          $foto = $row['gambar'];
+       ?>
       <div class="col-md-4" data-aos="fade-up" data-aos-delay="60">
         <article class="card-tour">
-          <img src="assets/images/bintje.png" alt="Binte Biluhuta">
+          <img src="assets/images/kuliner/<?=$foto?>" alt="Binte Biluhuta">
           <div class="p-3">
-            <h5 class="mb-1">Binte Biluhuta</h5>
-            <p class="small text-muted mb-2">Sup jagung khas Gorontalo, gurih dan hangat.</p>
+            <h5 class="mb-1"><?=$row['nama']?></h5>
+            <p class="small text-muted mb-2"><?=$row['deskripsi']?></p>
             <div class="d-flex justify-content-between align-items-center">
-              <span class="badge-accent">Tradisi</span>
-              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalKuliner1">Detail</button>
+              <span class="badge-accent"><?=$row['kategori']?></span>
+              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalKuliner<?=$row['id']?>">Detail</button>
             </div>
           </div>
         </article>
       </div>
-
-      <!-- Kuliner 2 -->
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="120">
-        <article class="card-tour">
-          <img src="assets/images/ilabulo.png" alt="Ilabulo">
-          <div class="p-3">
-            <h5 class="mb-1">Ilabulo</h5>
-            <p class="small text-muted mb-2">Hidangan adat, sering hadir dalam upacara tradisional.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge-accent">Khas</span>
-              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalKuliner2">Detail</button>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Kuliner 3 -->
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="180">
-        <article class="card-tour">
-          <img src="assets/images/ayam iloni.png" alt="Ayam Iloni">
-          <div class="p-3">
-            <h5 class="mb-1">Ayam Iloni</h5>
-            <p class="small text-muted mb-2">Ayam bakar berempah yang digemari lokal dan turis.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="badge-accent">Favorit</span>
-              <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalKuliner3">Detail</button>
-            </div>
-          </div>
-        </article>
-      </div>
+<?php } ?>
+     
     </div>
   </div>
 </section>
@@ -249,155 +210,81 @@ require 'layout/header.php'; ?>
     </div>
   </div>
 </section>
-
+<?php 
+$sql = "SELECT * FROM destinasi ";
+$result = mysqli_query($conn, $sql);
+while($row = mysqli_fetch_assoc($result)){
+  $foto = $row['cover'];
+?>
 <!-- Modal Wisata 1 -->
-<div class="modal fade" id="modalWisata1" tabindex="-1" aria-labelledby="modalWisata1Label" aria-hidden="true">
+<div class="modal fade" id="modalWisata<?=$row['id']?>" tabindex="-1" aria-labelledby="modalWisata<?=$row['id']?>" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalWisata1Label">Benteng Otanaha</h5>
+        <h5 class="modal-title" id="modalWisata1Label"><?=$row['nama']?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body">
-        <img src="assets/images/Benteng otanaha.png" alt="Benteng Otanaha" class="img-fluid rounded mb-3">
-        <p><strong>Lokasi:</strong> Bukit Otanaha, Gorontalo</p>
-        <p><strong>Deskripsi:</strong> Benteng Otanaha adalah benteng bersejarah yang menawarkan panorama Danau Limboto. Cocok untuk wisata sejarah, fotografi, dan sunrise/sunset viewing.</p>
-        <p><strong>Fasilitas:</strong> Parkir, area viewpoint, pedagang makanan ringan, jasa pemandu lokal.</p>
-        <p><strong>Jam buka:</strong> 06:00 - 18:00</p>
-        <p><strong>Biaya masuk:</strong> Rp 10.000 (perkiraan)</p>
-        <p><strong>Tips:</strong> Bawa air, gunakan sepatu yang nyaman untuk mendaki, kunjungi pagi hari untuk cuaca terbaik.</p>
+        <img src="assets/images/destinasi/<?=$foto?>" alt="<?=$row['nama']?>" class="img-fluid rounded mb-3">
+        <p><strong>Lokasi:</strong> <?=$row['nama']?>, Gorontalo</p>
+        <p><strong>Deskripsi:</strong> <?=$row['deskripsi']?></p>
+        <p><strong>Jam buka:</strong> <?=$row['jam_operasional']?></p>
+        <p><strong>Biaya masuk:</strong> Rp <?=$row['tiket_masuk']?> (perkiraan)</p>
+        <!-- <p><strong>Tips:</strong> Bawa air, gunakan sepatu yang nyaman untuk mendaki, kunjungi pagi hari untuk cuaca terbaik.</p> -->
         <div class="ratio ratio-16x9 mt-3">
           <!-- small preview map -->
-          <iframe src="https://www.google.com/maps?q=Benteng+Otanaha&output=embed" style="border:0;" allowfullscreen loading="lazy"></iframe>
-        </div>
+<iframe 
+    src="https://www.google.com/maps?q=<?= $row['lat'] ?>,<?= $row['lng'] ?>&output=embed" 
+    width="100%" 
+    height="300" 
+    style="border:0;" 
+    allowfullscreen=""
+    loading="lazy">
+</iframe>        </div>
       </div>
       <div class="modal-footer">
-        <a href="destinasi.html#benteng-otanaha" class="btn btn-outline-accent">Halaman Destinasi</a>
+        <a href="destinasi.php#id=<?=$row['id']?>" class="btn btn-outline-accent">Halaman Destinasi</a>
         <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal Wisata 2 -->
-<div class="modal fade" id="modalWisata2" tabindex="-1" aria-labelledby="modalWisata2Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalWisata2Label">Taman Laut Olele</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-      </div>
-      <div class="modal-body">
-        <img src="assets/images/taman olele.png" alt="Taman Laut Olele" class="img-fluid rounded mb-3">
-        <p><strong>Lokasi:</strong> Pesisir Gorontalo</p>
-        <p><strong>Deskripsi:</strong> Taman laut dengan keindahan terumbu karang, cocok untuk snorkeling dan diving. Habitat beragam biota laut.</p>
-        <p><strong>Fasilitas:</strong> Spot penyewaan peralatan snorkeling, guide selam, area bersantai.</p>
-        <p><strong>Jam buka:</strong> 08:00 - 16:00</p>
-        <p><strong>Biaya:</strong> Paket snorkeling & diving bervariasi (cek operator lokal).</p>
-        <div class="ratio ratio-16x9 mt-3">
-          <iframe src="https://www.google.com/maps?q=Taman+Laut+Olele&output=embed" style="border:0;" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="destinasi.html#olele" class="btn btn-outline-accent">Halaman Destinasi</a>
-        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Wisata 3 -->
-<div class="modal fade" id="modalWisata3" tabindex="-1" aria-labelledby="modalWisata3Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalWisata3Label">Whale Shark Botubarani</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-      </div>
-      <div class="modal-body">
-        <img src="assets/images/shark.png" alt="Whale Shark Botubarani" class="img-fluid rounded mb-3">
-        <p><strong>Lokasi:</strong> Botubarani coast</p>
-        <p><strong>Deskripsi:</strong> Lokasi untuk menyaksikan hiu paus secara etis bersama operator yang menjaga keamanan binatang.</p>
-        <p><strong>Fasilitas:</strong> Operator tur, perahu, panduan konservasi.</p>
-        <p><strong>Jam kunjungan:</strong> Sesuai jadwal operator.</p>
-        <div class="ratio ratio-16x9 mt-3">
-          <iframe src="https://www.google.com/maps?q=Botubarani&output=embed" style="border:0;" allowfullscreen loading="lazy"></iframe>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="destinasi.html#botubarani" class="btn btn-outline-accent">Halaman Destinasi</a>
-        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
+<?php 
+} ?>
 
 <!-- =========================
      MODAL DETAILS (KULINER)
    ========================= -->
+   <?php 
+   $sql = "SELECT * FROM kuliner ";
+   $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result)){
+      $foto = $row['gambar'];
+   ?>
 <!-- Kuliner 1 -->
-<div class="modal fade" id="modalKuliner1" tabindex="-1" aria-labelledby="modalKuliner1Label" aria-hidden="true">
+<div class="modal fade" id="modalKuliner<?=$row['id']?>" tabindex="-1" aria-labelledby="modalKuliner1Label" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalKuliner1Label">Binte Biluhuta</h5>
+        <h5 class="modal-title" id="modalKuliner1Label"><?=$row['nama']?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body">
-        <img src="assets/images/bintje.png" alt="Binte Biluhuta" class="img-fluid rounded mb-3">
-        <p><strong>Deskripsi:</strong> Sup jagung khas Gorontalo, berisi jagung, ikan, dan rempah. Sering dijual di warung tradisional.</p>
-        <p><strong>Tempat Mencoba:</strong> Pasar lokal & warung tradisional di pusat kota.</p>
-        <p><strong>Tips:</strong> Coba bersama sambal khas lokal untuk sensasi rasa lengkap.</p>
+        <img src="assets/images/kuliner/<?=$foto?>" alt="Binte Biluhuta" class="img-fluid rounded mb-3">
+        <p><strong>Deskripsi:</strong> <?=$row['deskripsi']?></p>
+        <p><strong>Bahan:</strong> <?=$row['bahan']?></p>
+        <!-- <p><strong>Tips:</strong> Coba bersama sambal khas lokal untuk sensasi rasa lengkap.</p> -->
       </div>
       <div class="modal-footer">
-        <a href="kuliner.html#binte" class="btn btn-outline-accent">Halaman Kuliner</a>
+        <a href="kuliner.php#<?=$row['id']?>" class="btn btn-outline-accent">Halaman Kuliner</a>
         <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
       </div>
     </div>
   </div>
 </div>
+<?php 
+} ?>
 
-<!-- Kuliner 2 -->
-<div class="modal fade" id="modalKuliner2" tabindex="-1" aria-labelledby="modalKuliner2Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalKuliner2Label">Ilabulo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-      </div>
-      <div class="modal-body">
-        <img src="assets/images/ilabulo.png" alt="Ilabulo" class="img-fluid rounded mb-3">
-        <p><strong>Deskripsi:</strong> Hidangan berbasis sagu dan daging, disajikan pada acara adat.</p>
-        <p><strong>Tempat Mencoba:</strong> Rumah makan tradisional & saat acara adat.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="kuliner.html#ilabulo" class="btn btn-outline-accent">Halaman Kuliner</a>
-        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Kuliner 3 -->
-<div class="modal fade" id="modalKuliner3" tabindex="-1" aria-labelledby="modalKuliner3Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalKuliner3Label">Ayam Iloni</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-      </div>
-      <div class="modal-body">
-        <img src="assets/images/ayam iloni.png" alt="Ayam Iloni" class="img-fluid rounded mb-3">
-        <p><strong>Deskripsi:</strong> Ayam panggang berempah dengan rasa khas Gorontalo.</p>
-        <p><strong>Tempat Mencoba:</strong> Rumah makan populer dan kedai tradisional.</p>
-      </div>
-      <div class="modal-footer">
-        <a href="kuliner.html#ayam-iloni" class="btn btn-outline-accent">Halaman Kuliner</a>
-        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- =========================
      MODAL DETAILS (EVENT)

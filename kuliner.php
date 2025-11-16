@@ -1,3 +1,6 @@
+<?php
+require 'databases/koneksi.php';
+?>
 <!doctype html>
 <html lang="id">
 
@@ -61,114 +64,39 @@
       </p>
 
       <div class="row g-4">
-
+<?php 
+$sql = "SELECT * FROM kuliner";
+$result = mysqli_query($conn,$sql);
+while($row = mysqli_fetch_assoc($result)){
+  $foto = $row['gambar'];
+?>
         <!-- KULINER 1 -->
         <div class="col-md-6" id="binte">
           <div class="card-tour" data-aos="fade-up">
-            <img src="assets/images/bintje.png">
+            <img src="assets/images/kuliner/<?=$foto?>">
             <div class="p-3">
-              <h4>Binte Biluhuta</h4>
-              <p class="text-muted small">Sup jagung khas Gorontalo dengan kuah gurih dan aroma rempah.</p>
+              <h4><?=$row['nama']?></h4>
+              <p class="text-muted small"><?=$row['deskripsi']?></p>
 
               <ul class="small">
-                <li><strong>Bahan Utama:</strong> Jagung, ikan cakalang/goropa, kemangi</li>
-                <li><strong>Kategori:</strong> Hidangan tradisional</li>
+                <li><strong>Bahan Utama:</strong> <?=$row['bahan']?></li>
+                <li><strong>Kategori:</strong> <?=$row['kategori']?></li>
               </ul>
 
-              <p>Rasanya manis-gurih segar, cocok dimakan pada malam hari atau saat cuaca dingin.</p>
+              <p><?=$row['deskripsi']?></p>
 
-              <h6 class="mt-3">Tempat Rekomendasi</h6>
+              <!-- <h6 class="mt-3">Tempat Rekomendasi</h6>
               <ul class="small">
                 <li>Warung Binte Kota Tua</li>
                 <li>Kuliner Center Gorontalo</li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </div>
 
-        <!-- KULINER 2 -->
-        <div class="col-md-6" id="ilabulo">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/ilabulo.png">
-            <div class="p-3">
-              <h4>Ilabulo</h4>
-              <p class="text-muted small">Hidangan adat berbahan dasar sagu, hati ayam, dan bumbu khas.</p>
+        <?php } ?>
 
-              <ul class="small">
-                <li><strong>Kategori:</strong> Makanan adat</li>
-                <li><strong>Tekstur:</strong> Kenyal & lembut</li>
-              </ul>
-
-              <p>Biasanya disajikan pada upacara adat. Rasa gurih pedasnya sangat khas Gorontalo.</p>
-
-              <h6 class="mt-3">Tempat Rekomendasi</h6>
-              <ul class="small">
-                <li>Ramayana Food Court</li>
-                <li>Warung Ilabulo Sentral</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- KULINER 3 -->
-        <div class="col-md-6" id="ayam-iloni">
-          <div class="card-tour" data-aos="fade-up">
-            <img src="assets/images/ayam iloni.png">
-            <div class="p-3">
-              <h4>Ayam Iloni</h4>
-              <p class="text-muted small">Ayam panggang berbumbu khas yang diolah dengan arang kelapa.</p>
-
-              <ul class="small">
-                <li><strong>Cita Rasa:</strong> Gurih, aromatik, sedikit pedas</li>
-                <li><strong>Kategori:</strong> Hidangan favorit</li>
-              </ul>
-
-              <p>Dipanggang perlahan hingga bumbunya meresap sempurna. Sangat cocok dimakan dengan nasi jagung.</p>
-
-              <h6 class="mt-3">Rekomendasi</h6>
-              <ul class="small">
-                <li>Rumah Makan Iloni Zamrud</li>
-                <li>Kuliner Pantai Leato</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- KULINER 4 -->
-        <div class="col-md-6" id="miluyu">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/miluyu.png">
-            <div class="p-3">
-              <h4>Miluyu</h4>
-              <p class="text-muted small">Kue tradisional manis berbahan dasar ketan dan gula aren.</p>
-
-              <p>Hidangan ringan yang wajib dicoba saat berkunjung pada hari besar atau festival rakyat.</p>
-
-              <h6 class="mt-3">Rekomendasi</h6>
-              <ul class="small">
-                <li>Pasar Sentral Gorontalo</li>
-                <li>Toko Kue Tradisional Kota Selatan</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- KULINER 5 -->
-        <div class="col-md-6" id="lalampa">
-          <div class="card-tour" data-aos="fade-up">
-            <img src="assets/images/lalampa.png">
-            <div class="p-3">
-              <h4>Lalampa</h4>
-              <p class="text-muted small">Makanan mirip lemper tetapi dibakar sehingga aromanya khas.</p>
-
-              <p>Isian ikan cakalang pedas dengan nasi ketan — sangat cocok sebagai oleh-oleh.</p>
-
-              <ul class="small">
-                <li>Tersedia hampir di seluruh pasar tradisional</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        
 
       </div><!-- end row -->
 

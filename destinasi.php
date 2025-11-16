@@ -1,3 +1,6 @@
+<?php
+require 'databases/koneksi.php';
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -57,135 +60,44 @@
       <p class="subtitle mb-4" data-aos="fade-right">Berikut daftar lengkap destinasi wisata yang wajib kamu kunjungi di Gorontalo.</p>
 
       <div class="row g-4">
+        <?php 
+        $sql = "SELECT * FROM destinasi ";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+        ?>
         <!-- DESTINASI 1 -->
         <div class="col-md-6" id="benteng-otanaha">
           <div class="card-tour" data-aos="fade-up">
-            <img src="assets/images/Benteng otanaha.png" />
+            <img src="assets/images/destinasi/<?=$row['cover']?>" />
             <div class="p-3">
-              <h4>Benteng Otanaha</h4>
-              <p class="text-muted small">Benteng bersejarah dengan pemandangan Danau Limboto yang luar biasa.</p>
+              <h4><?=$row['nama']?></h4>
+              <p class="text-muted small"><?=$row['deskripsi']?></p>
 
               <ul class="small">
-                <li><strong>Lokasi:</strong> Bukit Otanaha, Kota Gorontalo</li>
-                <li><strong>Jam Operasional:</strong> 06:00 – 18:00</li>
-                <li><strong>Tiket Masuk:</strong> Rp 10.000</li>
+                <li><strong>Lokasi:</strong> <?=$row['nama']?>, Kota Gorontalo</li>
+                <li><strong>Jam Operasional:</strong><?=$row['jam_operasional']?></li>
+                <li><strong>Tiket Masuk:</strong> Rp <?=$row['tiket_masuk']?></li>
               </ul>
 
-              <p>Peninggalan kerajaan Gorontalo dengan akses tangga yang menantang. Spot foto sunrise terbaik.</p>
+              <!-- <p>Peninggalan kerajaan Gorontalo dengan akses tangga yang menantang. Spot foto sunrise terbaik.</p> -->
 
               <div class="ratio ratio-16x9 mt-2">
-                <iframe src="https://www.google.com/maps?q=Benteng+Otanaha&output=embed"></iframe>
+               <iframe 
+    src="https://www.google.com/maps?q=<?= $row['lat'] ?>,<?= $row['lng'] ?>&output=embed" 
+    width="100%" 
+    height="300" 
+    style="border:0;" 
+    allowfullscreen=""
+    loading="lazy">
+</iframe>
               </div>
             </div>
           </div>
         </div>
+        <?php } ?>
 
-        <!-- DESTINASI 2 -->
-        <div class="col-md-6" id="olele">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/taman olele.png" />
-            <div class="p-3">
-              <h4>Taman Laut Olele</h4>
-              <p class="text-muted small">Surga bawah laut dengan terumbu karang kelas dunia.</p>
 
-              <ul class="small">
-                <li><strong>Lokasi:</strong> Bone Bolango, Gorontalo</li>
-                <li><strong>Aktivitas:</strong> Diving, Snorkeling</li>
-              </ul>
-
-              <p>Spot diving internasional dengan coral wall dan beragam ikan laut.</p>
-
-              <div class="ratio ratio-16x9 mt-2">
-                <iframe src="https://www.google.com/maps?q=Taman+Laut+Olele&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DESTINASI 3 -->
-        <div class="col-md-6" id="botubarani">
-          <div class="card-tour" data-aos="fade-up">
-            <img src="assets/images/shark.png" />
-            <div class="p-3">
-              <h4>Whale Shark Botubarani</h4>
-              <p class="text-muted small">Bertemu hiu paus secara etis di habitat alami.</p>
-
-              <ul class="small">
-                <li><strong>Lokasi:</strong> Botubarani, Kabila Bone</li>
-                <li><strong>Musim Terbaik:</strong> Mei – Oktober</li>
-              </ul>
-
-              <p>Wisata edukasi konservasi dengan pemandu bersertifikat.</p>
-
-              <div class="ratio ratio-16x9 mt-2">
-                <iframe src="https://www.google.com/maps?q=Botubarani&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DESTINASI 4 -->
-        <div class="col-md-6" id="pantai-biluhu">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/biluhu.png" />
-            <div class="p-3">
-              <h4>Pantai Biluhu</h4>
-              <p class="text-muted small">Pantai pasir putih dengan air laut biru jernih.</p>
-
-              <ul class="small">
-                <li><strong>Kegiatan:</strong> Snorkeling, berenang, foto prewedding</li>
-              </ul>
-
-              <p>Pantai tenang yang cocok untuk wisata keluarga & santai.</p>
-
-              <div class="ratio ratio-16x9 mt-2">
-                <iframe src="https://www.google.com/maps?q=Biluhu&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DESTINASI 5 -->
-        <div class="col-md-6" id="danau-limboto">
-          <div class="card-tour" data-aos="fade-up">
-            <img src="assets/images/danau limboto.png" />
-            <div class="p-3">
-              <h4>Danau Limboto</h4>
-              <p class="text-muted small">Danau terbesar di Gorontalo dengan aktivitas budaya lokal.</p>
-
-              <ul class="small">
-                <li><strong>Kegiatan:</strong> Fotografi, festival, wisata perahu</li>
-              </ul>
-
-              <p>Sering digunakan untuk event tahunan “Pesona Danau Limboto”.</p>
-
-              <div class="ratio ratio-16x9 mt-2">
-                <iframe src="https://www.google.com/maps?q=Danau+Limboto&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- DESTINASI 6 -->
-        <div class="col-md-6" id="pantai-botutonuo">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/images/bototonuo.png" />
-            <div class="p-3">
-              <h4>Pantai Botutonuo</h4>
-              <p class="text-muted small">Pantai landai dengan air jernih cocok untuk keluarga.</p>
-
-              <ul class="small">
-                <li><strong>Harga Tiket:</strong> Rp 5.000 – Rp 10.000</li>
-              </ul>
-
-              <p>Ombaknya tenang, cocok untuk anak-anak.</p>
-
-              <div class="ratio ratio-16x9 mt-2">
-                <iframe src="https://www.google.com/maps?q=Botutonuo&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
+     
       </div>
       <!-- end row -->
     </div>
