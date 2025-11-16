@@ -1,6 +1,7 @@
 <?php
-session_start();
 
+session_start();
+require '../databases/koneksi.php';
 // Jika sudah login, redirect ke index
 // if (isset($_SESSION['is-user']) || $_SESSION['is-user'] !== true) {
 //   header("Location: ../../auth/login.php");
@@ -140,14 +141,18 @@ session_start();
           <p class="text-muted mb-0">Ringkasan aktivitas dan data utama dalam sistem pariwisata.</p>
         </div>
       </div>
-
+<?php 
+    $total_destinasi = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM destinasi"));
+    $total_kuliner = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM kuliner"));
+    $total_event = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM event"));
+?>
       <!-- Statistik Ringkasan -->
       <div class="row g-4 mb-5">
         <div class="col-md-4">
           <div class="card shadow-sm border-0 h-100">
             <div class="card-body text-center py-4">
               <i class="bi bi-geo-alt display-5 text-primary mb-3"></i>
-              <h4 class="fw-bold">3</h4>
+              <h4 class="fw-bold"><?=$total_destinasi?></h4>
               <p class="text-muted mb-0">Total Destinasi</p>
             </div>
           </div>
@@ -157,7 +162,7 @@ session_start();
           <div class="card shadow-sm border-0 h-100">
             <div class="card-body text-center py-4">
               <i class="bi bi-shop display-5 text-success mb-3"></i>
-              <h4 class="fw-bold">3</h4>
+              <h4 class="fw-bold"><?=$total_kuliner?></h4>
               <p class="text-muted mb-0">Total Kuliner</p>
             </div>
           </div>
@@ -167,7 +172,7 @@ session_start();
           <div class="card shadow-sm border-0 h-100">
             <div class="card-body text-center py-4">
               <i class="bi bi-calendar-event display-5 text-warning mb-3"></i>
-              <h4 class="fw-bold">3</h4>
+              <h4 class="fw-bold"><?=$total_event?></h4>
               <p class="text-muted mb-0">Total Event</p>
             </div>
           </div>
@@ -189,31 +194,35 @@ session_start();
                 <th>Nama</th>
                 <th>Kategori</th>
                 <th>Tanggal</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
               </tr>
             </thead>
             <tbody>
+              <?php 
+              $no = 1;
+             $sql = "
+    SELECT 'destinasi' AS jenis, id, nama, created_at FROM destinasi
+    UNION ALL
+    SELECT 'kuliner' AS jenis, id, nama, created_at FROM kuliner
+    UNION ALL
+    SELECT 'event' AS jenis, id, nama, created_at FROM event
+    ORDER BY created_at DESC LIMIT 3
+";
+
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($result)) {
+  $jam = date("H:i:s",strtotime($row['created_at']));
+              ?>
               <tr>
-                <td>1</td>
-                <td>Pantai Olele</td>
-                <td>Destinasi</td>
-                <td>5 Okt 2025</td>
-                <td><span class="badge bg-success">Dipublikasikan</span></td>
+                <td><?=$no++?></td>
+                <td><?=$row['nama']?></td>
+                <td><?=$row['jenis']?></td>
+                <td><?=$jam?></td>
+                <!-- <td><span class="badge bg-success">Dipublikasikan</span></td> -->
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Ilabulo Bakar</td>
-                <td>Kuliner</td>
-                <td>5 Okt 2025</td>
-                <td><span class="badge bg-warning">Menunggu Review</span></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Festival Danau Limboto</td>
-                <td>Event</td>
-                <td>4 Okt 2025</td>
-                <td><span class="badge bg-success">Dipublikasikan</span></td>
-              </tr>
+              <?php } ?>
+          
+              
             </tbody>
           </table>
         </div>
