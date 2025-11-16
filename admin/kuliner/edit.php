@@ -1,4 +1,5 @@
 <?php
+require '../../databases/koneksi.php';
 require '../../layout/header_admin.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
@@ -13,39 +14,47 @@ require '../../layout/header_admin.php'; ?>
 
 <div class="card shadow-sm border-0">
   <div class="card-body p-4">
-
-    <form action="kuliner_store.php" method="POST" enctype="multipart/form-data">
+<?php 
+$id = $_GET['id'];
+$sql = "SELECT * FROM kuliner WHERE id=$id";
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($result);
+?>
+    <form action="proses_edit.php" method="POST" enctype="multipart/form-data">
       <div class="row g-4">
 
         <!-- Nama Kuliner -->
+        <input type="hidden" class="form-control" name="id" value="<?=$row['id']?>">
         <div class="col-md-6">
           <label class="form-label fw-semibold">Nama Kuliner<span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="nama" placeholder="Masukkan nama kuliner">
+          <input type="text" class="form-control" name="nama" value="<?=$row['nama']?>">
         </div>
 
         <!-- Bahan -->
         <div class="col-md-6">
           <label class="form-label fw-semibold">Bahan Utama<span class="text-danger">*</span></label>
-          <input type="text" class="form-control" name="bahan" placeholder="Masukkan bahan utama">
+          <input type="text" class="form-control" name="bahan" value="<?=$row['bahan']?>">
         </div>
 
         <!-- Kategori (Radio) -->
         <div class="col-md-12">
           <label class="form-label fw-semibold">Kategori</label>
           <div class="d-flex gap-4 mt-2">
-
+<?php $kategori = $row['kategori'];
+?>
+ 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="kategori" value="Hidangan Adat" id="kategori1">
+              <input class="form-check-input"  type="radio" <?php if($kategori == 'Hidangan Adat'){echo "checked";} ?> name="kategori" value="Hidangan Adat" id="kategori1">
               <label class="form-check-label" for="kategori1">Hidangan Adat</label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="kategori" value="Makanan Favorit" id="kategori2">
+              <input class="form-check-input" <?php if($kategori == 'Makanan Favorit'){echo "checked";} ?> type="radio" name="kategori" value="Makanan Favorit" id="kategori2">
               <label class="form-check-label" for="kategori2">Makanan Favorit</label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="kategori" value="Lainnya" id="kategori3">
+              <input class="form-check-input" <?php if($kategori == 'Lainnya'){echo "checked";} ?> type="radio" name="kategori" value="Lainnya" id="kategori3">
               <label class="form-check-label" for="kategori3">Lainnya</label>
             </div>
 
@@ -55,19 +64,20 @@ require '../../layout/header_admin.php'; ?>
         <!-- Deskripsi -->
         <div class="col-12">
           <label class="form-label fw-semibold">Deskripsi</label>
-          <textarea class="form-control" name="deskripsi" rows="4" placeholder="Tuliskan deskripsi kuliner"></textarea>
+          <textarea class="form-control" name="deskripsi" rows="4"><?=$row['deskripsi']?></textarea>
         </div>
 
         <!-- Gambar -->
         <div class="col-md-6">
           <label class="form-label fw-semibold">Foto Kuliner</label>
+          <input type="hidden" class="form-control" name="gambarlama" value="<?=$row['gambar']?>">
           <input type="file" class="form-control" name="gambar" accept=".jpg,.jpeg,.png">
         </div>
 
       </div>
 
       <div class="mt-5 d-flex justify-content-end gap-2">
-        <button type="submit" class="btn btn-warning px-4">
+        <button type="submit" name="edit" class="btn btn-warning px-4">
           <i class="bi bi-save me-1"></i> Update Kuliner
         </button>
       </div>

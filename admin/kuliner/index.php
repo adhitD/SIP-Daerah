@@ -1,4 +1,6 @@
-<?php require '../../layout/header_admin.php'; ?>
+<?php 
+require '../../databases/koneksi.php';
+require '../../layout/header_admin.php'; ?>
 
 <div class="container mt-5">
 
@@ -27,19 +29,24 @@
           </thead>
 
           <tbody>
-
+<?php 
+$no  =1 ;
+$sql = "SELECT * FROM kuliner";
+$result = mysqli_query($conn,$sql);
+while($row = mysqli_fetch_assoc($result)){
+?>
             <!-- Dummy 1 -->
             <tr class="text-center">
               <td>
-                <img src="assets/images/kuliner1.jpg"
+                <img src="../../assets/images/kuliner/<?=$row['gambar']?>"
                   width="80"
                   class="rounded shadow-sm">
               </td>
-              <td>1</td>
-              <td>Binte Biluhuta</td>
-              <td>Jagung, udang, ikan, bawang</td>
-              <td>Hidangan Adat</td>
-              <td>Sup jagung khas Gorontalo</td>
+              <td><?=$no++?></td>
+              <td><?=$row['nama']?></td>
+              <td><?=$row['bahan']?></td>
+              <td><?=$row['kategori']?></td>
+              <td><?=$row['deskripsi']?></td>
               <td>
                 <div class="dropdown">
                   <button class="bg-transparent btn-sm border-0"
@@ -49,14 +56,12 @@
 
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item text-warning" href="edit.php">
+                      <a class="dropdown-item text-warning" href="edit.php?id=<?=$row['id']?>">
                         <i class="bi bi-pencil me-1"></i>Edit
                       </a>
                     </li>
                     <li>
-                      <button class="dropdown-item text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete1">
+                      <a class="dropdown-item text-danger" href="proses_hapus.php?id=<?=$row['id']?>">
                         <i class="bi bi-trash me-1"></i>Hapus
                       </button>
                     </li>
@@ -64,80 +69,8 @@
                 </div>
               </td>
             </tr>
+            <?php } ?>
 
-            <!-- Dummy 2 -->
-            <tr class="text-center">
-              <td>
-                <img src="assets/images/kuliner2.jpg"
-                  width="80"
-                  class="rounded shadow-sm">
-              </td>
-              <td>2</td>
-              <td>Ilabulo</td>
-              <td>Hati ayam, sagu, rempah</td>
-              <td>Makanan Favorit</td>
-              <td>Makanan seperti pepes berbahan sagu</td>
-              <td>
-                <div class="dropdown">
-                  <button class="bg-transparent btn-sm border-0"
-                    data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item text-warning" href="#">
-                        <i class="bi bi-pencil me-1"></i>Edit
-                      </a>
-                    </li>
-                    <li>
-                      <button class="dropdown-item text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete2">
-                        <i class="bi bi-trash me-1"></i>Hapus
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-
-            <!-- Dummy 3 -->
-            <tr class="text-center">
-              <td>
-                <img src="assets/images/kuliner3.jpg"
-                  width="80"
-                  class="rounded shadow-sm">
-              </td>
-              <td>3</td>
-              <td>Perkedel Nike</td>
-              <td>Ikan nike, tepung, bawang</td>
-              <td>Makanan Lainnya</td>
-              <td>Gorengan ikan nike khas Gorontalo</td>
-              <td>
-                <div class="dropdown">
-                  <button class="bg-transparent btn-sm border-0"
-                    data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item text-warning" href="#">
-                        <i class="bi bi-pencil me-1"></i>Edit
-                      </a>
-                    </li>
-                    <li>
-                      <button class="dropdown-item text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete3">
-                        <i class="bi bi-trash me-1"></i>Hapus
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
 
           </tbody>
         </table>

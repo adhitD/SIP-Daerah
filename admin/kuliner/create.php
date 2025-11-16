@@ -14,7 +14,7 @@ require '../../layout/header_admin.php'; ?>
 <div class="card shadow-sm border-0">
   <div class="card-body p-4">
 
-    <form action="kuliner_store.php" method="POST" enctype="multipart/form-data">
+    <form action="proses_create.php" method="POST" enctype="multipart/form-data">
       <div class="row g-4">
 
         <!-- Nama Kuliner -->
@@ -33,7 +33,7 @@ require '../../layout/header_admin.php'; ?>
         <div class="col-md-12">
           <label class="form-label fw-semibold">Kategori</label>
           <div class="d-flex gap-4 mt-2">
-
+      
             <div class="form-check">
               <input class="form-check-input" type="radio" name="kategori" value="Hidangan Adat" id="kategori1">
               <label class="form-check-label" for="kategori1">Hidangan Adat</label>
@@ -61,13 +61,13 @@ require '../../layout/header_admin.php'; ?>
         <!-- Gambar -->
         <div class="col-md-6">
           <label class="form-label fw-semibold">Foto Kuliner</label>
-          <input type="file" class="form-control" name="gambar" accept=".jpg,.jpeg,.png">
+          <input type="file" class="form-control" name="gambar" accept="jpg,jpeg,png">
         </div>
 
       </div>
 
       <div class="mt-5 d-flex justify-content-end gap-2">
-        <button type="submit" class="btn btn-primary px-4">
+        <button type="submit" name="tambah" class="btn btn-primary px-4">
           <i class="bi bi-save me-1"></i> Simpan Kuliner
         </button>
       </div>
