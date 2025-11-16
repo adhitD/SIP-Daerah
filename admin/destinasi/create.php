@@ -86,6 +86,7 @@ require '../../layout/footer_admin.php'
 ?>
 
 <script>
+
 function getLocation() {
     navigator.geolocation.getCurrentPosition(function(pos){
         document.getElementById("lat").value = pos.coords.latitude;
@@ -94,7 +95,7 @@ function getLocation() {
 }
 
     // Lokasi awal: Indonesia tengah
-    var map = L.map('map').setView([0.5334731256031934, 123.06027573323716], 18);
+    var map = L.map('map').setView([0.5334731256031934, 123.06027573323716], 13);
 
     // Load tile map dari OpenStreetMap (gratis)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

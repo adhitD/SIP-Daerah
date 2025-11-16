@@ -10,22 +10,34 @@ $jam_operasional = $_POST['jam_operasional'];
 $tiket_masuk     = $_POST['tiket_masuk'];
 $deskripsi       = $_POST['deskripsi'];
 
-// Proses upload file
-$cover = $_FILES['cover']['name'];
-$tmp   = $_FILES['cover']['tmp_name'];
+if($_FILES['cover']['error'] === 4){
+echo "<script>alert ('gambar tidak ditemukan');</script>";
+}
+else{
 
-// Folder tujuan penyimpanan gambar
-$folder = "../../assets/images/destinasi/";
+$fileName = $_FILES['cover']['name'];
+$fileSize = $_FILES['cover']['size'];
+$tmpName =  $_FILES['cover']['tmp_name'];
 
-// Buat nama file unik agar tidak bentrok
-$namaBaru = time() . '_' . $cover;
+$valid = ['jpg', 'jpeg' ,'png'];
+$imageExtension = explode('.',$fileName);
+$imageExtension = strtolower(end($imageExtension));
+if(!in_array($imageExtension , $valid)){
+    echo
+    "<script>alert('extension tidak valid')</script>";
+}
+else if($fileSize > 4000000){
+    "<script>alert('gambar terlalu besar')</script>";
+}
+else{
+    $fileBaru = uniqid();
+    $fileBaru .= '.'.$imageExtension;
 
-// Pindahkan file ke folder
-if (move_uploaded_file($tmp, $folder . $namaBaru)) {
-    
+    move_uploaded_file($tmpName, '../../assets/images/destinasi/'. $fileBaru);
+
     // Query insert ke database
     $sql = "INSERT INTO destinasi(nama, lat, lng, jam_operasional, tiket_masuk, deskripsi, cover)
-            VALUES ('$nama', '$lat', '$lng', '$jam_operasional', '$tiket_masuk', '$deskripsi', '$namaBaru')";
+            VALUES ('$nama', '$lat', '$lng', '$jam_operasional', '$tiket_masuk', '$deskripsi', '$fileBaru')";
     
     $result = mysqli_query($conn, $sql);
 
@@ -36,8 +48,7 @@ if (move_uploaded_file($tmp, $folder . $namaBaru)) {
         echo "Gagal menyimpan data: " . mysqli_error($conn);
     }
 
-} else {
-    echo "Upload file gagal!";
+} }
 }
-}
+
 ?>
