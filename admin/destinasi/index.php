@@ -1,4 +1,6 @@
-<?php require '../../layout/header_admin.php'; ?>
+<?php
+require '../../databases/koneksi.php';
+require '../../layout/header_admin.php'; ?>
 
 <div class="container mt-5">
 
@@ -20,7 +22,7 @@
               <th>No</th>
               <th>Nama</th>
               <th>Lokasi</th>
-              <th>Kategori</th>
+              <th>jam operasional</th>
               <th>Harga Tiket</th>
               <th>Updated at</th>
               <th>Aksi</th>
@@ -29,6 +31,13 @@
 
           <tbody>
 
+<?php 
+$no  =1 ;
+$sql = "SELECT * FROM destinasi";
+$result = mysqli_query($conn,$sql);
+while($row = mysqli_fetch_assoc($result)){
+?>
+
             <!-- Dummy 1 -->
             <tr class="text-center">
               <td>
@@ -36,11 +45,14 @@
                   width="80"
                   class="rounded shadow-sm">
               </td>
-              <td>1</td>
-              <td>Benteng Otanaha</td>
-              <td>Kota Gorontalo</td>
-              <td>Sejarah</td>
-              <td>Rp 5.000</td>
+              <td><?=$no++?></td>
+              <td><?=$row['nama']?></td>
+              <td><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d63834.162559347285
+                !2d<?=$row['lng']?>
+                !3d<?=$row['lat']?>
+                !2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1763271727576!5m2!1sid!2sid" width="150" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></td>
+              <td><?=$row['jam_operasional']?></td>
+              <td>Rp <?=$row['tiket_masuk']?></td>
               <td>2 jam lalu</td>
               <td>
                 <div class="dropdown">
@@ -66,7 +78,7 @@
                 </div>
               </td>
             </tr>
-
+<?php } ?>
             <!-- Dummy 2 -->
             <tr class="text-center">
               <td>

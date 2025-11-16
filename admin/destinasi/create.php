@@ -1,6 +1,11 @@
 <?php
 require '../../layout/header_admin.php'; ?>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+    <style>
+        #map { height: 200px; width: 200px; }
+    </style>
 <!-- Header Halaman -->
 <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
   <div>
@@ -16,7 +21,7 @@ require '../../layout/header_admin.php'; ?>
 <div class="card shadow-sm border-0">
   <div class="card-body p-4">
 
-    <form action="destinasi_store.php" method="POST" enctype="multipart/form-data">
+    <form action="proses_create.php" method="POST" enctype="multipart/form-data">
       <div class="row g-4">
 
         <!-- Nama Destinasi -->
@@ -28,7 +33,9 @@ require '../../layout/header_admin.php'; ?>
         <!-- Lokasi -->
         <div class="col-md-6">
           <label for="lokasi" class="form-label fw-semibold">Lokasi <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Masukkan lokasi destinasi">
+          <div class="" id="map"></div>
+          <input type="hidden" class="form-control" id="lat" name="lat" >
+          <input type="hidden" class="form-control" id="lng" name="lng" >
         </div>
 
         <!-- Jam Operasional -->
@@ -52,14 +59,14 @@ require '../../layout/header_admin.php'; ?>
         <!-- Cover -->
         <div class="col-md-6">
           <label for="cover" class="form-label fw-semibold">Foto Destinasi</label>
-          <input type="file" class="form-control" id="cover" name="cover" accept=".jpg,.jpeg,.png">
+          <input type="file" class="form-control" id="cover" name="cover" accept="jpg,jpeg,png">
         </div>
 
       </div>
 
       <!-- Tombol Aksi -->
       <div class="mt-5 d-flex justify-content-end gap-2">
-        <button type="submit" class="btn btn-primary px-4">
+        <button type="submit" name="tambah" class="btn btn-primary px-4">
           <i class="bi bi-save me-1"></i> Simpan Destinasi
         </button>
       </div>
@@ -77,3 +84,41 @@ require '../../layout/header_admin.php'; ?>
 
 require '../../layout/footer_admin.php'
 ?>
+
+<script>
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(function(pos){
+        document.getElementById("lat").value = pos.coords.latitude;
+        document.getElementById("lng").value = pos.coords.longitude;
+    });
+}
+
+    // Lokasi awal: Indonesia tengah
+    var map = L.map('map').setView([0.5334731256031934, 123.06027573323716], 18);
+
+    // Load tile map dari OpenStreetMap (gratis)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    var marker;
+
+    // Event klik peta
+    map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        // Isi ke input form
+        document.getElementById("lat").value = lat;
+        document.getElementById("lng").value = lng;
+
+        // Hapus marker sebelumnya
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        // Buat marker baru
+        marker = L.marker([lat, lng]).addTo(map);
+    });
+
+</script>
