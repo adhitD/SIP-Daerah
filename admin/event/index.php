@@ -24,6 +24,7 @@ require '../../layout/header_admin.php'; ?>
               <th>Lokasi</th>
               <th>Keterangan</th>
               <th>Updated at</th>
+              <th>gambar</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -33,6 +34,7 @@ require '../../layout/header_admin.php'; ?>
   $sql = 'SELECT * FROM event';
   $result = mysqli_query($conn,$sql);
   while($row=mysqli_fetch_assoc($result)){
+    $gambar = $row['gambar'];
   ?>
             <!-- Dummy 1 -->
             <tr class="text-center">
@@ -42,6 +44,7 @@ require '../../layout/header_admin.php'; ?>
               <td><?=$row['lokasi']?></td>
               <td><?=$row['keterangan']?></td>
               <td>3 jam lalu</td>
+              <td><img src="../../assets/images/event/<?=$gambar?>" alt="" style="width: 100px; height: auto;"></td>
               <td>
                 <div class="dropdown">
                   <button class="bg-transparent btn-sm border-0"

@@ -14,7 +14,7 @@ require '../../layout/header_admin.php'; ?>
 <div class="card shadow-sm border-0">
   <div class="card-body p-4">
 
-    <form action="proses_create.php" method="POST">
+    <form action="proses_create.php" enctype="multipart/form-data" method="POST">
       <div class="row g-4">
 
         <!-- Nama Event -->
@@ -35,12 +35,17 @@ require '../../layout/header_admin.php'; ?>
           <input type="text" class="form-control" name="lokasi" placeholder="Masukkan lokasi event">
         </div>
 
+        <!-- foto -->
+        <div class="col-6">
+          <label class="form-label fw-semibold">Foto</label>
+          <input type="file" class="form-control" name="gambar">
+        </div>
+        
         <!-- Keterangan -->
         <div class="col-12">
           <label class="form-label fw-semibold">Keterangan</label>
           <textarea class="form-control" name="keterangan" rows="4" placeholder="Tuliskan keterangan atau detail event"></textarea>
         </div>
-
       </div>
 
       <div class="mt-5 d-flex justify-content-end gap-2">

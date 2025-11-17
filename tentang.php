@@ -22,7 +22,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.php">
-        <img src="assets/logo.png" width="40" height="40" style="border-radius:8px">
+        <img src="assets/images/Logo.png" width="40" height="40" style="border-radius:8px">
         Explore Gorontalo
       </a>
 

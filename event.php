@@ -61,6 +61,18 @@
       <div class="row g-4">
 
         <!-- EVENT 1 -->
+          <?php 
+ $sql = "SELECT * FROM event ";
+ $result = mysqli_query($conn, $sql);
+  while($row = mysqli_fetch_assoc($result)){
+    if(isset($row['gambar'])){
+    $foto = $row['gambar'];
+    }
+    else{
+      $foto = 'default.png'; // default image if none is set
+    }
+ ?>
+
         <div class="col-md-6" id="karawo">
           <div class="card-tour" data-aos="fade-up">
             <img src="assets/event1.jpg">
@@ -92,101 +104,10 @@
             </div>
           </div>
         </div>
+        <?php } ?>
 
-        <!-- EVENT 2 -->
-        <div class="col-md-6" id="limboto">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/event2.jpg">
-            <div class="p-3">
-              <h4>Pesona Danau Limboto</h4>
-              <p class="text-muted small">Festival budaya khas di kawasan Danau Limboto.</p>
 
-              <ul class="small">
-                <li><strong>Tanggal:</strong> 10 Agustus 2025</li>
-                <li><strong>Lokasi:</strong> Kabupaten Gorontalo</li>
-              </ul>
-
-              <p>
-                Event tahunan yang menampilkan parade perahu, festival kuliner
-                pesisir, dan pameran UMKM lokal.
-              </p>
-
-              <h6 class="mt-3">Sorotan Kegiatan:</h6>
-              <ul class="small">
-                <li>Lomba perahu hias</li>
-                <li>Pentas tarian rakyat</li>
-                <li>Festival kuliner pesisir</li>
-                <li>Pameran budaya pesisir</li>
-              </ul>
-
-              <div class="ratio ratio-16x9 mt-3">
-                <iframe src="https://www.google.com/maps?q=Danau+limboto&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- EVENT 3 -->
-        <div class="col-md-6" id="parade">
-          <div class="card-tour" data-aos="fade-up">
-            <img src="assets/event3.jpg">
-            <div class="p-3">
-              <h4>Gorontalo Cultural Parade</h4>
-              <p class="text-muted small">Defile budaya besar dengan kostum adat megah.</p>
-
-              <ul class="small">
-                <li><strong>Tanggal:</strong> 5 November 2025</li>
-                <li><strong>Lokasi:</strong> Pusat Kota Gorontalo</li>
-              </ul>
-
-              <p>
-                Parade ini menampilkan pakaian adat Gorontalo dipadukan seni kontemporer.
-                Sangat menarik bagi turis asing dan fotografer.
-              </p>
-
-              <h6 class="mt-3">Sorotan Kegiatan:</h6>
-              <ul class="small">
-                <li>Parade Kostum Adat</li>
-                <li>Pentas musik tradisional</li>
-                <li>Festival tarian modern</li>
-              </ul>
-
-              <div class="ratio ratio-16x9 mt-3">
-                <iframe src="https://www.google.com/maps?q=Gorontalo&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- EVENT 4 -->
-        <div class="col-md-6" id="hari-patriot">
-          <div class="card-tour" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/event4.jpg">
-            <div class="p-3">
-              <h4>Hari Patriot Gorontalo</h4>
-              <p class="text-muted small">Upacara dan parade militer memperingati sejarah perjuangan.</p>
-
-              <ul class="small">
-                <li><strong>Tanggal:</strong> 23 Januari setiap tahun</li>
-              </ul>
-
-              <p>
-                Dikhususkan untuk mengenang perjuangan rakyat Gorontalo memerdekakan diri dari kolonialisme.
-              </p>
-
-              <h6 class="mt-3">Sorotan Kegiatan:</h6>
-              <ul class="small">
-                <li>Upacara kenegaraan</li>
-                <li>Pagelaran seni budaya</li>
-                <li>Pameran foto sejarah</li>
-              </ul>
-
-              <div class="ratio ratio-16x9 mt-3">
-                <iframe src="https://www.google.com/maps?q=Kota+Gorontalo&output=embed"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
+    
 
       </div><!-- end row -->
 

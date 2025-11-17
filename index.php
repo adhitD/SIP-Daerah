@@ -1,6 +1,7 @@
 <?php
 require 'databases/koneksi.php';  
-require 'layout/header.php'; ?>
+require 'layout/header.php';
+?>
 
 <!-- HERO -->
 <header id="home" class="hero" role="banner" style="min-height: 45vh; background: url('assets/images/Head.png') center/cover">
@@ -40,7 +41,7 @@ require 'layout/header.php'; ?>
           <img src="assets/images/destinasi/<?=$foto?>" alt="Benteng Otanaha panorama">
           <div class="p-3">
             <h5 class="mb-1"><?=$row['nama']?></h5>
-            <p class="small text-muted mb-2"><?=$row['deskripsi']?></p>
+            <p class="small text-muted mb-2 text-truncate" style="max-width:800px;"><?=$row['deskripsi']?></p>
             <div class="d-flex justify-content-between align-items-center">
               <span class="badge-accent">Budaya</span>
               <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalWisata<?=$row['id']?>">Detail</button>
@@ -84,7 +85,7 @@ require 'layout/header.php'; ?>
           <img src="assets/images/kuliner/<?=$foto?>" alt="Binte Biluhuta">
           <div class="p-3">
             <h5 class="mb-1"><?=$row['nama']?></h5>
-            <p class="small text-muted mb-2"><?=$row['deskripsi']?></p>
+            <p class="small text-muted mb-2 text-truncate" style="max-width: 700px;"><?=$row['deskripsi']?></p>
             <div class="d-flex justify-content-between align-items-center">
               <span class="badge-accent"><?=$row['kategori']?></span>
               <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalKuliner<?=$row['id']?>">Detail</button>
@@ -112,41 +113,27 @@ require 'layout/header.php'; ?>
     </div>
 
     <div class="row g-4">
+      <?php 
+      $sql = "SELECT * FROM event ";
+      $result = mysqli_query($conn, $sql);
+      while($row = mysqli_fetch_assoc($result)){
+        // $foto = $row['gambar'];
+      ?>
       <!-- Event 1 -->
       <div class="col-md-4" data-aos="flip-left" data-aos-delay="60">
         <div class="card-tour p-3">
-          <h5>Festival Karawo</h5>
-          <p class="small text-muted mb-2">Pameran & lomba kerajinan bordir Karawo — menampilkan perajin lokal.</p>
+          <h5><?=$row['nama']?></h5>
+          <p class="small text-muted mb-2 text-truncate"><?=$row['keterangan']?></p>
           <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">Tanggal: 20 Okt 2025</small>
-            <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalEvent1">Detail</button>
+            <small class="text-muted"><?=$row['tanggal'] ?></small>
+            <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalEvent<?=$row['id']?>">Detail</button>
           </div>
         </div>
       </div>
-
+<?php 
+      } ?>
       <!-- Event 2 -->
-      <div class="col-md-4" data-aos="flip-left" data-aos-delay="120">
-        <div class="card-tour p-3">
-          <h5>Pesona Danau Limboto</h5>
-          <p class="small text-muted mb-2">Perayaan budaya di tepi Danau Limboto, termasuk parade budaya.</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">Tanggal: 10 Ags 2025</small>
-            <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalEvent2">Detail</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Event 3 -->
-      <div class="col-md-4" data-aos="flip-left" data-aos-delay="180">
-        <div class="card-tour p-3">
-          <h5>Gorontalo Cultural Parade</h5>
-          <p class="small text-muted mb-2">Pawai budaya menampilkan pakaian adat dan pertunjukan seni.</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">Tanggal: 05 Nov 2025</small>
-            <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalEvent3">Detail</button>
-          </div>
-        </div>
-      </div>
+    
     </div>
   </div>
 </section>
@@ -290,51 +277,44 @@ while($row = mysqli_fetch_assoc($result)){
      MODAL DETAILS (EVENT)
    ========================= -->
 <!-- Event 1 -->
-<div class="modal fade" id="modalEvent1" tabindex="-1" aria-labelledby="modalEvent1Label" aria-hidden="true">
+ <?php 
+ $sql = "SELECT * FROM event ";
+ $result = mysqli_query($conn, $sql);
+  while($row = mysqli_fetch_assoc($result)){
+    if(isset($row['gambar'])){
+    $foto = $row['gambar'];
+    }
+    else{
+      $foto = 'default.png'; // default image if none is set
+    }
+ ?>
+<div class="modal fade" id="modalEvent<?=$row['id']?>" tabindex="-1" aria-labelledby="modalEvent1Label" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalEvent1Label">Festival Karawo</h5>
+        <h5 class="modal-title" id="modalEvent1Label"><?=$row['nama']?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body">
-        <img src="assets/images/karawo.png" alt="Festival Karawo" class="img-fluid rounded mb-3">
-        <p><strong>Deskripsi:</strong> Festival yang menampilkan kerajinan bordir Karawo, workshop, dan pameran perajin lokal.</p>
-        <p><strong>Lokasi:</strong> Pusat Kota</p>
-        <p><strong>Tanggal:</strong> 20 Oktober 2025</p>
-        <p><strong>Kontak/Daftar:</strong> info@gorontalo.go.id</p>
+         <img src="assets/images/event/<?=$foto?>" alt="Pesona Danau Limboto" class="img-fluid rounded mb-3">
+        
+        <p><strong>Deskripsi:</strong> <?=$row['keterangan']?></p>
+        <p><strong>Lokasi:</strong> <?=$row['nama']?></p>
+        <p><strong>Tanggal:</strong> <?=$row['tanggal']?></p>
+        <p><strong>Kontak/Daftar:</strong> admin@example.com</p>
       </div>
       <div class="modal-footer">
-        <a href="event.html#karawo" class="btn btn-outline-accent">Halaman Event</a>
+        <a href="event.php#<?=$row['id']?>" class="btn btn-outline-accent">Halaman Event</a>
         <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
       </div>
     </div>
   </div>
 </div>
+<?php 
+  } ?>
 
-<!-- Event 2 -->
-<div class="modal fade" id="modalEvent2" tabindex="-1" aria-labelledby="modalEvent2Label" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalEvent2Label">Pesona Danau Limboto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-      </div>
-      <div class="modal-body">
-        <img src="assets/images/danau limboto.png" alt="Pesona Danau Limboto" class="img-fluid rounded mb-3">
-        <p><strong>Deskripsi:</strong> Perayaan budaya dan atraksi di tepi Danau Limboto, festival kuliner dan pertunjukan seni.</p>
-        <p><strong>Tanggal:</strong> 10 Agustus 2025</p>
-      </div>
-      <div class="modal-footer">
-        <a href="event.html#limboto" class="btn btn-outline-accent">Halaman Event</a>
-        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Event 3 -->
-<div class="modal fade" id="modalEvent3" tabindex="-1" aria-labelledby="modalEvent3Label" aria-hidden="true">
+<!-- contoh Event  -->
+<!-- <div class="modal fade" id="modalEvent3" tabindex="-1" aria-labelledby="modalEvent3Label" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -352,7 +332,7 @@ while($row = mysqli_fetch_assoc($result)){
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <?php
 

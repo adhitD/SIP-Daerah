@@ -20,11 +20,11 @@ $id = $_GET['id'];
   $result = mysqli_query($conn,$sql);
   $row= mysqli_fetch_assoc($result);
 ?>
-    <form action="proses_edit.php" method="POST">
+    <form action="proses_edit.php" enctype="multipart/form-data" method="POST">
       <div class="row g-4">
 
         <!-- Nama Event -->
-        <input type="hidden" class="form-control" name="id" value="<?=$row['id']?>">
+        <input type="hidden"  class="form-control" name="id" value="<?=$row['id']?>">
         <div class="col-md-6">
           <label class="form-label fw-semibold">Nama Event<span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="nama" value="<?=$row['nama']?>">
@@ -41,6 +41,12 @@ $id = $_GET['id'];
           <label class="form-label fw-semibold">Lokasi Event<span class="text-danger">*</span></label>
           <input type="text" class="form-control" name="lokasi" value="<?=$row['lokasi']?>" >
         </div>
+        <!-- Foto -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Foto Event<span class="text-danger">*</span></label>
+          <input type="file" class="form-control" name="gambar" accept="jpg,png,jpeg" >
+        </div>
+        <input type="hidden" class="form-control" name="gambarlama" value="<?=$row['gambar']?>" >
 
         <!-- Keterangan -->
         <div class="col-12">
